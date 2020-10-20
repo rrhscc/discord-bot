@@ -18,6 +18,11 @@ async def on_ready():
 @client.command()
 async def hi(ctx):
     await ctx.send("hi")
+      
+#echo command, this one has arguments
+@client.command()
+async def echo(ctx, stuff: str):
+   await ctx.send(stuff)
 
 # start sending the things to the discord
 await client.run(TOKEN)
