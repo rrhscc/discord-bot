@@ -3,8 +3,8 @@ import discord
 from discord.ext import commands
 
 # get extra top secret data from discord
-intents = discord.Intents.default()
-intents.members = True
+#intents = discord.Intents.default()
+#intents.members = True
 
 #make bot with * prefix
 client = commands.Bot(command_prefix = "*", intents = intents)
