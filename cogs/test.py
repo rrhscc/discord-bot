@@ -11,3 +11,6 @@ class Tests(commands.Cog):
         else:
             await ctx.send('Ping {0.name}... This feels familiar.'.format(member))
         self._last_member = member
+
+def setup(bot):
+    bot.add_cog(Tests(bot))
