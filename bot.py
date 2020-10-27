@@ -1,6 +1,7 @@
 #import the stuff
 import discord
 from discord.ext import commands
+import cogs
 
 # get extra top secret data from discord
 #intents = discord.Intents.default()
