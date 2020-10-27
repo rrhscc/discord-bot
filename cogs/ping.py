@@ -10,4 +10,4 @@ class Ping(commands.Cog):
       await ctx.send(f"Bot ping is {bot.latency}")
       
 def setup(bot):
-    bot.add_cog(MembersCog(bot))
+    bot.add_cog(Ping(bot))
