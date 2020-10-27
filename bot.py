@@ -29,4 +29,5 @@ if __name__ == "__main__":
    bot.load_extension(cogs.test)
 
 # start sending the things to the discord
-await client.run(TOKEN)
+with open("token.txt") as f:
+   await client.run(f.read())
