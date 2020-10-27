@@ -26,8 +26,8 @@ async def echo(ctx, stuff: str):
    await ctx.send(stuff)
    
 if __name__ == "__main__":
-   bot.load_extension(cogs.ping)
-   bot.load_extension(cogs.test)
+   client.load_extension(cogs.ping)
+   client.load_extension(cogs.test)
 
 # start sending the things to the discord
 with open("token.txt") as f:
