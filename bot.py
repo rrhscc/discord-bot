@@ -32,7 +32,7 @@ async def echo(ctx, stuff: str):
    
 if __name__ == "__main__":
    bot.load_extension("ping")
-   bot.load_extension("test")
+   bot.load_extension("example")
 
 # start sending the things to the discord
 with open("token.txt") as f:
