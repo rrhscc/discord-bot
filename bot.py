@@ -23,6 +23,10 @@ async def hi(ctx):
 @client.command()
 async def echo(ctx, stuff: str):
    await ctx.send(stuff)
+   
+if __name__ == "__main__":
+   bot.load_extension(cogs.ping)
+   bot.load_extension(cogs.test)
 
 # start sending the things to the discord
 await client.run(TOKEN)
