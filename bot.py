@@ -7,7 +7,8 @@ from discord.ext import commands
 #intents.members = True
 
 #make bot with * prefix
-client = commands.Bot(command_prefix = "*", intents = intents)
+#client = commands.Bot(command_prefix = "*", intents = intents)
+client = commands.Bot(command_prefix = "*")
 
 #print bot here when the bot connects to discord
 @client.event
