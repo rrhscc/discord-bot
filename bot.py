@@ -1,7 +1,11 @@
 #import the stuff
 import discord
 from discord.ext import commands
-from cogs import *
+import json
+
+# with open("config.json") as f:
+#   config = json.load(f)
+
 
 # get extra top secret data from discord
 #intents = discord.Intents.default()
@@ -27,9 +31,11 @@ async def echo(ctx, stuff: str):
    await ctx.send(stuff)
    
 if __name__ == "__main__":
-   client.load_extension(ping)
-   client.load_extension(test)
+   bot.load_extension(cogs.ping)
+   bot.load_extension(cogs.test)
 
 # start sending the things to the discord
 with open("token.txt") as f:
    client.run(f.read())
+
+#bot.run(config['TOKEN'])
