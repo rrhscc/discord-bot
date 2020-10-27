@@ -1,0 +1,30 @@
+import random
+
+print("Welcome To Blackjack!")
+
+choose = input("Press enter to start")
+cardStart = random.randint(1, 13)
+userNum = cardStart
+compNum = random.randint(1, 13)
+
+while True:
+    print("\nyour turn!")
+    print("current total:" , str(userNum))
+    card = random.randint(1, 13)
+    print("new card:" , str(card))
+    userNum += card
+    print("your new total:" , str(userNum))
+    if(userNum > 21):
+        print("you went over! you lose :(")
+        break
+    choose = input("hit or stand? ")
+
+    print("\ncomputer's turn!")
+    print(compNum)
+    compCard = random.randint(1, 13)
+    print(compCard)
+    compNum += compCard
+    print("computer total:", str(compNum))
+    
+    if(choose == "stand"):
+        break
