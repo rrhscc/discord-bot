@@ -30,4 +30,4 @@ if __name__ == "__main__":
 
 # start sending the things to the discord
 with open("token.txt") as f:
-   await client.run(f.read())
+   client.run(f.read())
