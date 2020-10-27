@@ -6,9 +6,9 @@ class Tests(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def ping(self, ctx, *, member: discord.Member = None):
+    async def hello(self, ctx, *, member: discord.Member = None):
         member = member or ctx.author
-        await ctx.send('Ping {0.name}~'.format(member))
+        await ctx.send('Hello {0.name}'.format(member))
 
 def setup(bot):
     bot.add_cog(Tests(bot))
