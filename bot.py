@@ -18,17 +18,17 @@ import json
 bot = commands.Bot(command_prefix = "*")
 
 #print bot here when the bot connects to discord
-@client.event
+@bot.event
 async def on_ready():
    print("bot here")
 
 #send hi to discord when someone does *hi
-@client.command()
+@bot.command()
 async def hi(ctx):
     await ctx.send("hi")
       
 #echo command, this one has arguments
-@client.command()
+@bot.command()
 async def echo(ctx, stuff: str):
    await ctx.send(stuff)
    
