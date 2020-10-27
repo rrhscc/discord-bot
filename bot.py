@@ -1,8 +1,6 @@
 #import the stuff
 import discord
 from discord.ext import commands
-from ping import *
-from test import *
 import json
 
 # with open("config.json") as f:
