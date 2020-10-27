@@ -38,6 +38,6 @@ if __name__ == "__main__":
 
 # start sending the things to the discord
 with open("token.txt") as f:
-   client.run(f.read())
+   bot.run(f.read())
 
 #bot.run(config['TOKEN'])
