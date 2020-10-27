@@ -7,7 +7,7 @@ class Ping(commands.Cog):
       
   @commands.command()
   async def botping(self,ctx):
-      await ctx.send(f"Bot ping is {self.latency}")
+      await ctx.send(f"Bot ping is {self.bot.latency}")
       
 def setup(bot):
     bot.add_cog(Ping(bot))
