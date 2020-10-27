@@ -1,14 +1,14 @@
 import discord
 from discord.ext import commands
 
-class Tests(commands.Cog):
+class Example(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def hello(self, ctx, *, member: discord.Member = None):
         member = member or ctx.author
-        await ctx.send('Hello {0.name}'.format(member))
+        await ctx.send(f'Hello {member.name}')
 
 def setup(bot):
-    bot.add_cog(Tests(bot))
+    bot.add_cog(Example(bot))
