@@ -1,6 +1,8 @@
 #import the stuff
 import discord
 from discord.ext import commands
+import ping
+import test
 import json
 
 # with open("config.json") as f:
@@ -13,7 +15,7 @@ import json
 
 #make bot with * prefix
 #client = commands.Bot(command_prefix = "*", intents = intents)
-client = commands.Bot(command_prefix = "*")
+bot = commands.Bot(command_prefix = "*")
 
 #print bot here when the bot connects to discord
 @client.event
