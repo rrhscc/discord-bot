@@ -1,5 +1,6 @@
 # blackjack
 import discord
+import asyncio
 from discord.ext import commands
 
 class blackJack(commands.Cog):
