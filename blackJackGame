@@ -7,12 +7,38 @@ class blackJack(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def hello(self, ctx, *, member: discord.Member = None):
-        member = member or ctx.author
+    async def blackJack(self, ctx):
         await ctx.send(f'Welcome To Blackjack!')
+        print(current total)
 
 def setup(bot):
     bot.add_cog(blackJack(bot))
+
+scores_p #player
+scores_h #house
+
+while current_total > 21:
+
+    if current_total > 21:
+        print("GAME OVER")
+
+    if reaction = hit:
+        print("new card")
+        new_total = current_total + hit_number
+        print(new_total)
+
+    current total = new total
+    
+    if reaction = stand:
+        print("new card")
+        new_total_h = current_total_h + hit_number
+        print(new_total_h)
+        
+    current_total_h = new_total_h
+
+print("Win!")
+print("Lose!")
+
 
 
 """
