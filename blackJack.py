@@ -7,8 +7,7 @@ class blackJack(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def blackJack(self, ctx, *, member: discord.Member = None):
-        member = member or ctx.author
+    async def blackJack(self, ctx):
         await ctx.send(f'Welcome To Blackjack!')
 
 def setup(bot):
