@@ -1,7 +1,21 @@
 # blackjack
+import discord
+from discord.ext import commands
 
-import random
+class blackJack(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
+    @commands.command()
+    async def hello(self, ctx, *, member: discord.Member = None):
+        member = member or ctx.author
+        await ctx.send(f'Welcome To Blackjack!')
+
+def setup(bot):
+    bot.add_cog(blackJack(bot))
+
+
+"""
 print("Welcome To Blackjack!")
 
 choose = input("Press enter to start")
@@ -27,7 +41,7 @@ def winner():
     else:
         print("push !")
 
-while True:
+while True:  # BAD
     print("\nYOUR TURN")
     userNum = getCard(userNum)
     
@@ -48,3 +62,4 @@ while True:
 
 # insurance : 11 can be used as one if total is over 21
 # bet amount
+"""
