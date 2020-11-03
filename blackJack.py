@@ -16,7 +16,7 @@ class blackJack(commands.Cog):
             return user == ctx.author and str(reaction.emoji) == '👍'
 
         try:
-            reaction, user = await client.wait_for('reaction_add', timeout=30.0, check=check)
+            reaction, user = await self.wait_for('reaction_add', timeout=30.0, check=check)
         except asyncio.TimeoutError:
             await m.edit('timed out.')
         else:
