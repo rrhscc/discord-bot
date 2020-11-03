@@ -1,30 +1,50 @@
+# blackjack
+
 import random
 
 print("Welcome To Blackjack!")
 
 choose = input("Press enter to start")
-cardStart = random.randint(1, 13)
-userNum = cardStart
+userNum = random.randint(1, 13)
 compNum = random.randint(1, 13)
 
-while True:
-    print("\nyour turn!")
-    print("current total:" , str(userNum))
+def getCard(num):
+    print("current total:", str(num))
     card = random.randint(1, 13)
-    print("new card:" , str(card))
-    userNum += card
-    print("your new total:" , str(userNum))
+    print("new card:", str(card))
+    num += card
+    print("new total:", str(num))
+    return num
+
+def winner():
+    if compNum > userNum:
+        if(compNum > 21):
+            print("computer went over ; you win !")
+        else:
+            print("you lose !")
+    elif compNum < userNum:
+        print("you win !")
+    else:
+        print("push !")
+
+while True:
+    print("\nYOUR TURN")
+    userNum = getCard(userNum)
+    
     if(userNum > 21):
         print("you went over! you lose :(")
         break
     choose = input("hit or stand? ")
 
-    print("\ncomputer's turn!")
-    print(compNum)
-    compCard = random.randint(1, 13)
-    print(compCard)
-    compNum += compCard
-    print("computer total:", str(compNum))
+    print("\nCOMPUTER TURN")
+    compNum = getCard(compNum)
     
     if(choose == "stand"):
+        while compNum <= 21:
+            compNum = getCard(compNum)
+            print("")
+        winner()
         break
+
+# insurance : 11 can be used as one if total is over 21
+# bet amount
