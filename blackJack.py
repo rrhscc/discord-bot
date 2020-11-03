@@ -13,14 +13,14 @@ class blackJack(commands.Cog):
         await m.add_reaction("✅")
 
         def check(reaction, user):
-            return user == ctx.author and str(reaction.emoji) == '👍'
+            return user == ctx.author and str(reaction.emoji) == "✅"
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
         except asyncio.TimeoutError:
-            await m.edit('timed out.')
+            await m.edit('timed out. :(')
         else:
-            await channel.send('👍')
+            await ctx.send('POGCHAMP')
 
 def setup(bot):
     bot.add_cog(blackJack(bot))
