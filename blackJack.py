@@ -8,7 +8,8 @@ class blackJack(commands.Cog):
 
     @commands.command()
     async def blackJack(self, ctx):
-        await ctx.send(f'Welcome To Blackjack!')
+        m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
+        await m.add_reaction("✅")
 
 def setup(bot):
     bot.add_cog(blackJack(bot))
