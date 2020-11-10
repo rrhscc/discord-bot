@@ -79,7 +79,11 @@ input("Welcome to WAR, a mindless pastime to procrastinate on your homework with
 play = "yes"
 while play == "yes":
   #-----reset-----
-  card_deck = [2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  # card_deck = [2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14,2,3,4,5,6,7,8,9,10,11,12,13,14]
+  card_deck = []
+  for i in range(0, 4):
+	  card_deck.extend(range(2, 15))
+  
   random.shuffle(card_deck)
   #print(f"Card deck: {card_deck}")
   you = [] 
