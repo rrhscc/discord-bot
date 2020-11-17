@@ -19,6 +19,13 @@ bot = commands.Bot(command_prefix = "*",intents=intents)
 @bot.event
 async def on_ready():
    print("bot here")
+   
+@bot.event
+async def on_message(message):
+   if message.author == bot.user:
+      return
+   
+   await bot.process_commands(message)
 
 #send hi to discord when someone does *hi
 @bot.command()
