@@ -8,11 +8,11 @@ import json
 
 
 # don't get extra top secret data from discord
-intents = discord.Intents.default()
+#intents = discord.Intents.default()
 
 # make bot with * prefix
 #client = commands.Bot(command_prefix = "*", intents = intents)
-bot = commands.Bot(command_prefix = "*",intents=intents)
+bot = commands.Bot(command_prefix = "*")
 
 # print bot here when the bot connects to discord
 @bot.event
