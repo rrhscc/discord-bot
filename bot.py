@@ -3,23 +3,23 @@ import discord
 from discord.ext import commands
 import json
 
-# with open("config.json") as f:
+#with open("config.json") as f:
 #   config = json.load(f)
 
 
-# get extra top secret data from discord
+# don't get extra top secret data from discord
 intents = discord.Intents.default()
-intents.members = True
 
-#make bot with * prefix
+# make bot with * prefix
 #client = commands.Bot(command_prefix = "*", intents = intents)
 bot = commands.Bot(command_prefix = "*",intents=intents)
 
-#print bot here when the bot connects to discord
+# print bot here when the bot connects to discord
 @bot.event
 async def on_ready():
    print("bot here")
-   
+
+# process all messages
 @bot.event
 async def on_message(message):
    if message.author == bot.user:
@@ -27,22 +27,23 @@ async def on_message(message):
    
    await bot.process_commands(message)
 
-#send hi to discord when someone does *hi
+# send hi to discord when someone does *hi
 @bot.command()
 async def hi(ctx):
     await ctx.send("hi")
       
-#echo command, this one has arguments
+# echo command, this one has arguments
 @bot.command()
 async def echo(ctx, stuff: str):
    await ctx.send(stuff)
-   
+
+# load all other commands
 if __name__ == "__main__":
    bot.load_extension("ping")
    bot.load_extension("example")
    bot.load_extension("blackJack")
 
-# start sending the things to the discord
+# start the bot
 with open("token.txt") as f:
    bot.run(f.read())
 
