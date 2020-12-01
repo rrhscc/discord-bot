@@ -6,15 +6,13 @@ class Example(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def hello(self, ctx, *, member: discord.Member = None):
-        msg_split = ctx.message.content.split()
-        print(msg_split)
-        try:
-            await ctx.send(f'Hello {msg_split[1].name}')
+    async def hello(self, ctx, *, recip=None, member: discord.Member = None):
+        if recip is not None:
+            await ctx.send(f'Hello {recip}!')
             return
-        except:
-            member = member or ctx.author
-            await ctx.send(f'Hello {member.name}')
+
+        member = member or ctx.author
+        await ctx.send(f'Hello {member.name}!')
 
 def setup(bot):
     bot.add_cog(Example(bot))
