@@ -7,7 +7,7 @@ class chnick(commands.Cog):
         self.bot = bot
       
   @commands.command()
-  async def chnick(self, ctx, *, member: discord.Member = None):
+  async def chnick(self, ctx, member: discord.Member = None):
     print(ctx.message.content)
     msg_split = ctx.message.content.split()
     if len(msg_split) > 0:
