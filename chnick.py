@@ -7,7 +7,7 @@ class chnick(commands.Cog):
         self.bot = bot
       
   @commands.command()
-  async def chnick(ctx, *, member: discord.Member):
+  async def chnick(self, ctx, *, member: discord.Member = None):
     msg_split = ctx.content.split()
     if msg_split.length > 0:
         username = msg_split[1].name or member.nick
