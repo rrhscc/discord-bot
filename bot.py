@@ -42,6 +42,7 @@ if __name__ == "__main__":
    bot.load_extension("ping")
    bot.load_extension("example")
    bot.load_extension("blackJack")
+   bot.load_extension("chnick")
 
 # start the bot
 with open("token.txt") as f:
