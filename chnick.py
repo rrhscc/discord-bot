@@ -7,8 +7,8 @@ class chnick(commands.Cog):
         self.bot = bot
       
   @commands.command(pass_context=True)
-  async def chnick(ctx, member: discord.Member, nick):
-    username = ctx.message.author.display_name
+  async def chnick(ctx, *, nick, member: discord.Member):
+    username = nick or ctx.message.author.display_name
     await member.edit(nick="🎄" + username + "🎄")
     await ctx.send(f'Nickname was changed for {member.mention} ')
       
