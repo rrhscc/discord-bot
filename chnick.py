@@ -10,7 +10,7 @@ class chnick(commands.Cog):
   async def chnick(self, ctx):
     msg_split = ctx.message.content.split(" ", 1) #limits to 1 split
     if len(msg_split) > 1:
-        username = msg_split[1].name or member.nick
+        username = msg_split[1] or member.nick
         await ctx.message.author.edit(nick="🎄" + username + "🎄")
         await ctx.send(f'Nickname was changed.')
         return
