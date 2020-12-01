@@ -8,8 +8,8 @@ class chnick(commands.Cog):
       
   @commands.command()
   async def chnick(self, ctx, *, member: discord.Member = None):
-    msg_split = ctx.content.split()
-    if msg_split.length > 0:
+    msg_split = ctx.message.content.split()
+    if len(msg_split) > 0:
         username = msg_split[1].name or member.nick
         await member.edit(nick="🎄" + username + "🎄")
         await ctx.send(f'Nickname was changed.')
