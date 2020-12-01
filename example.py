@@ -7,8 +7,8 @@ class Example(commands.Cog):
 
     @commands.command()
     async def hello(self, ctx, *, member: discord.Member = None):
-        msg_split = ctx.content.split()
-        if msg_split.length > 0:
+        msg_split = ctx.message.content.split()
+        if len(msg_split) > 0:
             await ctx.send(f'Hello {msg_split[1].name}')
             return
         
