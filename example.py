@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from bot import thing
+#from bot import thing
 
 class Example(commands.Cog):
     def __init__(self, bot):
