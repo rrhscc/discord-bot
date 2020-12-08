@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 import json
 
+thing = ["beans"]
+
 #with open("config.json") as f:
 #   config = json.load(f)
 
