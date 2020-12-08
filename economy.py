@@ -29,7 +29,7 @@ class Economy(commands.Cog):
     
     @commands.command()
     async def balance(self, ctx):
-        amt = await self.amount(self, ctx.author)
+        amt = await self.amount(ctx.author)
         await ctx.send(f"You have ${amt}")
     
 def setup(bot):
