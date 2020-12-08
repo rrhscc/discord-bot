@@ -9,7 +9,7 @@ class Economy(commands.Cog):
     
     # Returns false if there is not enough money in member's bank
     async def withdraw_money(self, member, money):
-        if economy_dict[member.id] is None:
+        if economy_dict.get(member.id, None) is None:
             economy_dict[member.id] = 0
         if economy_dict[member.id] - money < 0:
             return false
@@ -17,13 +17,13 @@ class Economy(commands.Cog):
         return true
 
     async def deposit_money(self, member, money):
-        if economy_dict[member.id] is None:
+        if economy_dict.get(member.id, None) is None:
             economy_dict[member.id] = 0
         economy_dict[member.id] += money
         return true
     
     async def amount(self, member):
-        if economy_dict[member.id] is None:
+        if economy_dict.get(member.id, None) is None:
             economy_dict[member.id] = 0
         return economy_dict[member.id]
     
