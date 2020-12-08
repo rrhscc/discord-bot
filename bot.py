@@ -42,6 +42,7 @@ async def echo(ctx, stuff: str):
 # load all other commands
 if __name__ == "__main__":
    bot.load_extension("ping")
+   bot.load_extension("economy")
    bot.load_extension("example")
    bot.load_extension("blackJack")
    bot.load_extension("chnick")
