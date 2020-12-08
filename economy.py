@@ -22,5 +22,16 @@ class Economy(commands.Cog):
         economy_dict[member.id] += money
         return true
     
+    async def amount(self, member):
+        if economy_dict[member.id] is None:
+            economy_dict[member.id] = 0
+        return economy_dict[member.id]
+    
+    @commands.command()
+    async def balance(self, ctx):
+        if economy_dict[member.id] is None:
+            economy_dict[member.id] = 0
+        await ctx.send(f"You have ${economy_dict[ctx.author.id]}")
+    
 def setup(bot):
     bot.add_cog(Economy(bot))
