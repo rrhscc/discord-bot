@@ -26,12 +26,12 @@ class Economy(commands.Cog):
         return true
     
     async def amount(self, member):
-        output = c.execute("SELECT price FROM bank WHERE id=?", [member.id])
+        output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
             output = 0
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
-        return output[0]
+        return output
     
     @commands.command()
     async def balance(self, ctx):
