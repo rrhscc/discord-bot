@@ -12,12 +12,14 @@ class Economy(commands.Cog):
     
     # Returns false if there is not enough money in member's bank
     async def withdraw_money(self, member, money):
-        if economy_dict.get(member.id, None) is None:
-            economy_dict[member.id] = 0
-        if economy_dict[member.id] - money < 0:
+        output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
+        print(output)
+        if output == None:
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
             return false
-        economy_dict[member.id] -= money
-        return true
+        update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=", [member.id, money])
+        print(update)
+        return output[0] >= money
 
     async def deposit_money(self, member, money):
         if economy_dict.get(member.id, None) is None:
@@ -29,9 +31,9 @@ class Economy(commands.Cog):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
-            output = 0
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
-        return output
+            return 0
+        return output[0]
     
     @commands.command()
     async def balance(self, ctx):
