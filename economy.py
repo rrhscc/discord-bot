@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
-
+import sqlite3
+conn = sqlite3.connect('database.db')
+# CREATE TABLE bank (id INTEGER PRIMARY KEY, price REAL)
+c = conn.cursor()
 economy_dict = {}
 
 class Economy(commands.Cog):
@@ -23,9 +26,12 @@ class Economy(commands.Cog):
         return true
     
     async def amount(self, member):
-        if economy_dict.get(member.id, None) is None:
-            economy_dict[member.id] = 0
-        return economy_dict[member.id]
+        output = c.execute("SELECT price FROM bank WHERE id=?", [member.id])
+        print(output)
+        if output == None:
+            output = 0
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
+        return output[0]
     
     @commands.command()
     async def balance(self, ctx):
