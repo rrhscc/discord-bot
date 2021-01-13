@@ -39,6 +39,20 @@ class Economy(commands.Cog):
     async def balance(self, ctx):
         amt = await self.amount(ctx.author)
         await ctx.send(f"You have ${amt}")
+        
+    @commands.command()
+    async def burn(self, ctx, amount: float = None):
+        if amount == None:
+            await ctx.send(f"Please specify an amount to burn")
+            return
+        if amount < 0:
+            await ctx.send(f"Please specify a positive amount to burn")
+            return
+        success = await self.withdraw_money(ctx.author, amount)
+        if success:
+            await ctx.send(f"Burned successfully")
+            return
+        await ctx.send(f"You do not have enough money to burn.")
     
 def setup(bot):
     bot.add_cog(Economy(bot))
