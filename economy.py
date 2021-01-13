@@ -16,7 +16,7 @@ class Economy(commands.Cog):
         print(output)
         if output == None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
-            return false
+            return False
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=", [money, member.id, money])
         print(update)
         return output[0] >= money
@@ -25,7 +25,7 @@ class Economy(commands.Cog):
         if economy_dict.get(member.id, None) is None:
             economy_dict[member.id] = 0
         economy_dict[member.id] += money
-        return true
+        return True
     
     async def amount(self, member):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
