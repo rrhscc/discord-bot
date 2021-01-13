@@ -17,7 +17,7 @@ class Economy(commands.Cog):
         if output == None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
             return false
-        update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=", [member.id, money])
+        update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=", [money, member.id, money])
         print(update)
         return output[0] >= money
 
