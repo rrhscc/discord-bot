@@ -4,7 +4,6 @@ import sqlite3
 conn = sqlite3.connect('database.db')
 # CREATE TABLE bank (id INTEGER PRIMARY KEY, price REAL)
 c = conn.cursor()
-economy_dict = {}
 
 class Economy(commands.Cog):
     def __init__(self, bot):
@@ -42,7 +41,7 @@ class Economy(commands.Cog):
     @commands.command()
     async def balance(self, ctx):
         amt = await self.amount(ctx.author)
-        await ctx.send(f"You have ${amt}")
+        await ctx.send(f"You have {'${:,.2f}'.format(amt)}")
         
     @commands.command()
     async def burn(self, ctx, amount: float = None):
