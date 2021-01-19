@@ -10,7 +10,7 @@ class blackJack(commands.Cog):
     @commands.command()
     async def blackJack(self, ctx):
         economy = self.bot.get_cog('Economy')
-        if economy is not none:
+        if economy is not None:
             money = 10;
             await economy.deposit_money(ctx.author, money)
         m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
