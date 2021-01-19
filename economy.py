@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import sqlite3
+
+initial_money = 10
+
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
 c.execute("CREATE TABLE IF NOT EXISTS bank (id INTEGER PRIMARY KEY, price REAL)")
@@ -15,7 +18,7 @@ class Economy(commands.Cog):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
-            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
             return False
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=?", [money, member.id, money])
         print(update)
@@ -25,7 +28,7 @@ class Economy(commands.Cog):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
-            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, money])
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money + money])
             return True
         update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id, money])
         print(update)
@@ -35,7 +38,7 @@ class Economy(commands.Cog):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
-            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, 0])
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
             return 0
         return output[0]
     
