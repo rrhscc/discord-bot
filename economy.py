@@ -39,7 +39,7 @@ class Economy(commands.Cog):
         print(output)
         if output == None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
-            return 0
+            return initial_money
         return output[0]
     
     @commands.command()
