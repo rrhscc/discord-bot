@@ -22,9 +22,13 @@ class Economy(commands.Cog):
         return output[0] >= money
 
     async def deposit_money(self, member, money):
-        if economy_dict.get(member.id, None) is None:
-            economy_dict[member.id] = 0
-        economy_dict[member.id] += money
+        output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
+        print(output)
+        if output == None:
+            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, money])
+            return True
+        update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id, money])
+        print(update)
         return True
     
     async def amount(self, member):
