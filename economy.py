@@ -4,7 +4,7 @@ import sqlite3
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
 c.execute("CREATE TABLE IF NOT EXISTS bank (id INTEGER PRIMARY KEY, price REAL)")
-c.execute("CREATE TABLE IF NOT EXISTS daily (id INTEGER PRIMARY KEY, date TEXT)")
+c.execute("CREATE TABLE IF NOT EXISTS daily (id INTEGER PRIMARY KEY, datetime TEXT)")
 
 class Economy(commands.Cog):
     def __init__(self, bot):
