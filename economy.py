@@ -45,7 +45,7 @@ class Economy(commands.Cog):
         
     @commands.command()
     async def burn(self, ctx, amount: float = None):
-        if amount == None or not (isInstance(amount, float) or isInstance(amount, int)):
+        if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
             await ctx.send(f"Please specify an amount to burn")
             return
         if amount < 0:
