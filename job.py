@@ -8,7 +8,7 @@ class job(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def job(self, ctx, money):
+    async def job(self, ctx):
         m = await ctx.send(f'Get a job. React with ✅ to begin.')
         await m.add_reaction("✅")
  
