@@ -11,10 +11,10 @@ class Coinflip(commands.Cog):
     @commands.command()
     async def coinflip(self, ctx, *, member: discord.Member = None, bet = None):
         if member is None:
-            await ctx.send("Please specify a member to play.)
+            await ctx.send("Please specify a member to play.")
             return
         if bet is None or not (isinstance(amount, float) or isinstance(amount, int)):
-            await ctx.send("Please specify a bet amount. Both you and your opponent will have to have at least this much money.)
+            await ctx.send("Please specify a bet amount. Both you and your opponent will have to have at least this much money.")
             return
         
         m = await ctx.send(f'{ctx.author.name} has challenged {member.name} to a coinless coinflip! The pool is {'${:,.2f}'.format(bet*2)} requiring **{'${:,.2f}'.format(bet)}** from each player.\n{member.mention} must accept with ✅ to coinflip.')
