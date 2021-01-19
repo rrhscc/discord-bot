@@ -30,7 +30,7 @@ class Economy(commands.Cog):
         if output == None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money + money])
             return True
-        update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id, money])
+        update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id])
         print(update)
         return True
     
