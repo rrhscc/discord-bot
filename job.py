@@ -15,17 +15,17 @@ class job(commands.Cog):
                       
         def check(reaction, user):
             return user == ctx.author and str(reaction.emoji) == "✅"
-            newJob = 'Doctor'
+            #newJob = 'Doctor'
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
         except asyncio.TimeoutError:
             await m.edit('timed out. :(')
         else:
-            await ctx.send('You have a new job. Your job is now: ', newJob)
+            await ctx.send('You have a new job. Your job is now: Worker')
             economy = self.bot.get_cog('Economy')
             if economy is not None:
-            await economy.deposit_money(ctx.author, money + 1.25)
+                await economy.deposit_money(ctx.author, 1.25)
 
             
 
