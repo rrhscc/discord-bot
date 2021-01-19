@@ -46,7 +46,23 @@ class Economy(commands.Cog):
     async def balance(self, ctx):
         amt = await self.amount(ctx.author)
         await ctx.send(f"You have {'${:,.2f}'.format(amt)}")
-        
+    
+
+    @commands.command()
+    async def give(self, ctx, amount: float = None):
+        if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
+            await ctx.send(f"Please specify an amount to burn.")
+            return
+        if amount < 0:
+            await ctx.send(f"Please specify a positive amount to burn.")
+            return
+        success = await self.withdraw_money(ctx.author, amount)
+        if success:
+            await ctx.send(f"You successfully burned ${amount}!")
+            return
+        await ctx.send(f"You do not have enough money to burn.")
+                       
+                       
     @commands.command()
     async def give(self, ctx, amount: float = None, member: discord.Member = None):
         if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
@@ -69,7 +85,7 @@ class Economy(commands.Cog):
             await ctx.send(embed=embed_var)
             
             return
-        await ctx.send(f"You do not have enough money to burn.")
+        await ctx.send(f"You do not have enough money to give.")
     
 def setup(bot):
     bot.add_cog(Economy(bot))
