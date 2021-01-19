@@ -8,15 +8,14 @@ class blackJack(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def blackJack(self, ctx):
-        economy = self.bot.get_cog('Economy')
-        if economy is not None:
-            money = 10;
-            await economy.deposit_money(ctx.author, money)
+    async def blackJack(self, ctx, money):
         m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
         await m.add_reaction("✅")
+ 
+                
         
-               
+        def coinflip(self):
+            return random.randint(0, 1)        
 
         def check(reaction, user):
             return user == ctx.author and str(reaction.emoji) == "✅"
@@ -27,6 +26,12 @@ class blackJack(commands.Cog):
             await m.edit('timed out. :(')
         else:
             await ctx.send('POGCHAMP')
+            economy = self.bot.get_cog('Economy')
+            if economy is not None:
+                await economy.withdraw_money(ctx.author, money)
+                if self.coinflip() == 1:
+                    await economy.deposit_money(ctx.author, money * 1.25)
+            
 
 def setup(bot):
     bot.add_cog(blackJack(bot))
