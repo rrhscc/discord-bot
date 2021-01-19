@@ -41,12 +41,13 @@ async def echo(ctx, stuff: str):
 
 # load all other commands
 if __name__ == "__main__":
-   bot.load_extension("ping")
-   bot.load_extension("economy")
-   bot.load_extension("example")
    bot.load_extension("blackJack")
    bot.load_extension("chnick")
+   bot.load_extension("coinflip")
+   bot.load_extension("economy")
+   bot.load_extension("example")
    bot.load_extension("job")
+   bot.load_extension("ping")
 
 # start the bot
 with open("token.txt") as f:
