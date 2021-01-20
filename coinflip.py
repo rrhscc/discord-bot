@@ -16,6 +16,8 @@ class Coinflip(commands.Cog):
             return
         
         m = await ctx.send(f"{ctx.author.name} has challenged {member.name} to a coinless coinflip! The pool is {'${:,.2f}'.format(bet*2)} requiring **{'${:,.2f}'.format(bet)}** from each player.\n{member.mention} must accept with ✅ to coinflip.")
+        await m.add_reaction("✅")
+        
         def check(reaction, user):
             return user == member and str(reaction.emoji) == "✅"
         try:
@@ -27,7 +29,7 @@ class Coinflip(commands.Cog):
             economy = self.bot.get_cog('Economy')
             author_balance = await economy.withdraw_money(ctx.author, bet)
             if not author_balance:
-                await ctx.send(f"{author.mention} doesn't have enough money.")
+                await ctx.send(f"{ctx.author.mention} doesn't have enough money.")
                 return
             member_balance = await economy.withdraw_money(member, bet)
             if not member_balance < bet:
