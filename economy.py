@@ -18,8 +18,12 @@ class Economy(commands.Cog):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
         if output == None:
-            c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
-            return False
+            if initial_money < money:
+                c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
+                return False
+            else:
+                c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money-money])
+                return True
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=?", [money, member.id, money])
         print(update)
         return output[0] >= money
@@ -49,7 +53,7 @@ class Economy(commands.Cog):
     
 
     @commands.command()
-    async def give(self, ctx, amount: float = None):
+    async def burn(self, ctx, amount: float = None):
         if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
             await ctx.send(f"Please specify an amount to burn.")
             return
