@@ -51,6 +51,9 @@ class Economy(commands.Cog):
         amt = await self.amount(ctx.author)
         await ctx.send(f"You have {'${:,.2f}'.format(amt)}")
     
+    @commands.command()
+    async def b(self, ctx):
+        await balance(ctx)
 
     @commands.command()
     async def burn(self, ctx, amount: float = None):
