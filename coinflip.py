@@ -28,12 +28,12 @@ class Coinflip(commands.Cog):
             return
         else:
             economy = self.bot.get_cog('Economy')
-            author_balance = await economy.withdraw_money(ctx.author, bet)
-            if not author_balance:
+            author_withdraw = await economy.withdraw_money(ctx.author, bet)
+            if not author_withdraw:
                 await ctx.send(f"{ctx.author.mention} doesn't have enough money.")
                 return
-            member_balance = await economy.withdraw_money(member, bet)
-            if not member_balance < bet:
+            member_withdraw = await economy.withdraw_money(member, bet)
+            if not member_withdraw:
                 await ctx.send(f"{member.mention} doesn't have enough money.")
                 await economy.deposit_money(ctx.author, bet)
                 return
