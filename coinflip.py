@@ -7,7 +7,7 @@ class Coinflip(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def coinflip(self, ctx, *, member: discord.Member = None, bet = None):
+    async def coinflip(self, ctx, *, member: discord.Member = None, bet: Float = None):
         if member is None:
             await ctx.send("Please specify a member to play.")
             return
