@@ -20,12 +20,15 @@ class Economy(commands.Cog):
         if output is None:
             if initial_money < money:
                 c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
+                conn.commit()
                 return False
             else:
                 c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money-money])
+                conn.commit()
                 return True
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=?", [money, member.id, money])
         print(update)
+        conn.commit()
         return update is not None
 
     async def deposit_money(self, member, money):
@@ -33,9 +36,11 @@ class Economy(commands.Cog):
         print(output)
         if output is None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money + money])
+            conn.commit()
             return True
         update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id])
         print(update)
+        conn.commit()
         return True
     
     async def amount(self, member):
@@ -43,6 +48,7 @@ class Economy(commands.Cog):
         print(output)
         if output is None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
+            conn.commit()
             return initial_money
         return output[0]
     
