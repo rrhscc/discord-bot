@@ -46,7 +46,7 @@ class Economy(commands.Cog):
             return initial_money
         return output[0]
     
-    @commands.command(description="Show your account balance.", aliases=['b', 'bal, 'amount', 'amt'])
+    @commands.command(description="Show your account balance.", aliases=['b', 'bal', 'amount', 'amt'])
     async def balance(self, ctx):
         amt = await self.amount(ctx.author)
         await ctx.send(f"You have {'${:,.2f}'.format(amt)}")
