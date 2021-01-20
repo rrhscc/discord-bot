@@ -46,16 +46,12 @@ class Economy(commands.Cog):
             return initial_money
         return output[0]
     
-    @commands.command()
+    @commands.command(description="Show your account balance.", aliases=['b', 'bal, 'amount', 'amt'])
     async def balance(self, ctx):
         amt = await self.amount(ctx.author)
         await ctx.send(f"You have {'${:,.2f}'.format(amt)}")
-    
-    @commands.command()
-    async def b(self, ctx):
-        await balance(ctx)
 
-    @commands.command()
+    @commands.command(description="Burn money.")
     async def burn(self, ctx, amount: float = None):
         if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
             await ctx.send(f"Please specify an amount to burn.")
@@ -70,7 +66,7 @@ class Economy(commands.Cog):
         await ctx.send(f"You do not have enough money to burn.")
                        
                        
-    @commands.command()
+    @commands.command(description="Give someone money.")
     async def give(self, ctx, amount: float = None, member: discord.Member = None):
         if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
             await ctx.send(f"Please specify an amount to give.")
