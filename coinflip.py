@@ -11,7 +11,7 @@ class Coinflip(commands.Cog):
         if member is None:
             await ctx.send("Please specify a member to play.")
             return
-        if bet is None or not (isinstance(amount, float) or isinstance(amount, int)):
+        if bet is None or not (isinstance(bet, float) or isinstance(bet, int)):
             await ctx.send("Please specify a bet amount. Both you and your opponent will have to have at least this much money.")
             return
         
