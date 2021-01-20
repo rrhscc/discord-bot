@@ -17,7 +17,7 @@ class Economy(commands.Cog):
     async def withdraw_money(self, member, money):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
-        if output == None:
+        if output is None:
             if initial_money < money:
                 c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
                 return False
@@ -31,7 +31,7 @@ class Economy(commands.Cog):
     async def deposit_money(self, member, money):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
-        if output == None:
+        if output is None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money + money])
             return True
         update = c.execute("UPDATE bank SET price=price+? WHERE id=?", [money, member.id])
@@ -41,7 +41,7 @@ class Economy(commands.Cog):
     async def amount(self, member):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
         print(output)
-        if output == None:
+        if output is None:
             c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money])
             return initial_money
         return output[0]
