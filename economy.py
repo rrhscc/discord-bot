@@ -26,7 +26,7 @@ class Economy(commands.Cog):
                 return True
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=?", [money, member.id, money])
         print(update)
-        return output[0] >= money
+        return update is not None
 
     async def deposit_money(self, member, money):
         output = c.execute("SELECT price FROM bank WHERE id=?", [member.id]).fetchone()
