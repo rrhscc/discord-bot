@@ -87,7 +87,7 @@ class Economy(commands.Cog):
         if success:
             await self.deposit_money(member, amount)
             
-            embed_var = discord.Embed(description=f'{str(money)} seashells, just for you, {member.display_name}!')
+            embed_var = discord.Embed(description=f'{str(amount)} seashells, just for you, {member.display_name}!')
             embed_var.set_author(name=f'From {ctx.author.display_name}...', icon_url=ctx.author.avatar_url)
             embed_var.set_thumbnail(url=member.avatar_url)
 
