@@ -9,12 +9,12 @@ thing = ["beans"]
 #   config = json.load(f)
 
 
-# don't get extra top secret data from discord
-#intents = discord.Intents.default()
+# don't get extra top secret data from Discord. except for some
+intents = discord.Intents.default()
+intents.members = True
 
 # make bot with * prefix
-#client = commands.Bot(command_prefix = "*", intents = intents)
-bot = commands.Bot(command_prefix = "*")
+bot = commands.Bot(command_prefix = "*", intents=intents)
 
 # print bot here when the bot connects to discord
 @bot.event
