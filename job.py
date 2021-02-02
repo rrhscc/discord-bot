@@ -8,7 +8,7 @@ class job(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def job(ctx):
+    async def job(self, ctx):
             await ctx.send('You have a new job. Your job is now: Worker')
             guild = ctx.guild
             await guild.create_role(name="Worker")
