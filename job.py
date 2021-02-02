@@ -31,3 +31,4 @@ class job(commands.Cog):
                 
 def setup(bot):
     bot.add_cog(job(bot))
+    bot.add_cog(unemployment(bot))
