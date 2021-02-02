@@ -18,15 +18,16 @@ class job(commands.Cog):
                 await ctx.send('I do not have permission to create this role.')
                 
             await member.add_roles(role)
-            
-            
-            
-            
-           # economy = self.bot.get_cog('Economy')
-           # if economy is not None:
+            # economy = self.bot.get_cog('Economy')
+            # if economy is not None:
                 #await economy.deposit_money(ctx.author, 1.25)
-
-            
-
+                
+    @commands.command()
+    async def unemployment(self, ctx):
+        employed = role.members.length
+        total = guild.member_count
+        unemployed = total - employed
+        await ctx.send(f'In this server, {employed} members of {total} are employed. This means {unemployed} members are unemployed. The unemployment rate is {round(unemployed/total*100)}%.')
+                
 def setup(bot):
     bot.add_cog(job(bot))
