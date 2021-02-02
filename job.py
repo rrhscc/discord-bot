@@ -25,7 +25,7 @@ class job(commands.Cog):
     @commands.command()
     async def unemployment(self, ctx):
         role = discord.utils.get(guild.roles, name="Worker")
-        if role is None or employed := role.members.length == 0:
+        if role is None or (employed := role.members.length) == 0:
             await ctx.send("All members are unemployed. The unemployment rate is literally 100%.")
         total = guild.member_count
         unemployed = total - employed
