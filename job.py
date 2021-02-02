@@ -9,12 +9,15 @@ class job(commands.Cog):
 
     @commands.command()
     async def job(self, ctx):
-            await ctx.send('You have a new job. Your job is now: Worker')
+            await ctx.send('You have a new job. Your job is now: Factory Worker')
             guild = ctx.guild
-            await guild.create_role(name="Worker")
             member = ctx.message.author
-            role = get(member.server.roles, name="Worker")
-            await bot.add_roles(member, role)
+            try:
+                if (role := discord.utils.get(guild.roles, name="Worker")) is None: role = await guild.create_role(name="Worker")
+            except discord.errors.Forbidden:
+                await ctx.send('I do not have permission to create this role.')
+                
+            await member.add_roles(role)
             
             
             
