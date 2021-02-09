@@ -21,6 +21,27 @@ class Job(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def nomorejob(self,ctx):
+        current_job = await find_current_job(ctx.author)
+        if current_job == None:
+            await ctx.send("You don't have a job to remove!")
+            return
+        msg = await ctx.send("are you sure you want to remove your job? react with ✅ to confirm.")
+        await msg.add_reaction("✅")
+        
+        def check(reaction, user):
+            return user == ctx.author and str(reaction.emoji) == "✅"
+        try:
+            reaction, user = await self.bot.wait_for("reaction_add", timeout=30.0, check=check)
+        except asyncio.TimeoutError:
+            await m.edit(content="Time ran out.")
+            return
+        else:
+            current_j := discord.utils.get(guild.roles, name=possible_job)
+            ctx.author.remove_roles(current_j)
+            await ctx.send("removed your job!")
+    
+    @commands.command()
     async def job(self, ctx):
         guild = ctx.guild
         member = ctx.message.author
