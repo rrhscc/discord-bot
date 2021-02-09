@@ -30,7 +30,9 @@ class Coinflip(commands.Cog):
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
         except asyncio.TimeoutError:
-            await m.edit('timed out. :(')
+            try:
+                await m.edit(content = 'timed out. :(')
+            except: pass
             return
         else:
             economy = self.bot.get_cog('Economy')
