@@ -23,13 +23,13 @@ class Job(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['resign', 'quit'])
-    async def nomorejob(self,ctx):
+    @commands.command(aliases=['nomorejob', 'quit'])
+    async def resign(self,ctx):
         current_job = await find_current_job(ctx.author)
         if current_job == None:
             await ctx.send("You don't have a job to remove!")
             return
-        msg = await ctx.send("Are you sure you want to resign from your job? React with ✅ to confirm.")
+        msg = await ctx.send(f"Are you sure you want to resign from your job as `{current_job.name}`? React with ✅ to confirm.")
         await msg.add_reaction("✅")
         
         def check(reaction, user):
@@ -40,9 +40,8 @@ class Job(commands.Cog):
             await m.edit(content="Time ran out.")
             return
         else:
-            current_j = discord.utils.get(guild.roles, name=possible_job)
-            ctx.author.remove_roles(current_j)
-            await ctx.send("You have resigned from your job!")
+            ctx.author.remove_roles(current_job)
+            await ctx.send(f"You have resigned from your job as `{current_job.name}`.")
     
     @commands.command()
     async def job(self, ctx):
