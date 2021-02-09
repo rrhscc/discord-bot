@@ -16,10 +16,10 @@ class Coinflip(commands.Cog):
             await ctx.send("Please specify a bet amount. Both you and your opponent will have to have at least this much money.")
             return
         if member == ctx.author:
-            await ctx.send("nice try, you cant bet against yourself")
+            await ctx.send("Nice try, you cant bet against yourself.")
             return
         if member.bot:
-            await ctx.send("you can't coinflip against bots!")
+            await ctx.send("You can't coinflip against bots!")
             return
         
         m = await ctx.send(f"{ctx.author.name} has challenged {member.name} to a coinless coinflip! The pool is {'${:,.2f}'.format(bet*2)} requiring **{'${:,.2f}'.format(bet)}** from each player.\n{member.mention} must accept with ✅ to coinflip.")
