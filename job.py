@@ -40,7 +40,7 @@ class Job(commands.Cog):
             await m.edit(content="Time ran out.")
             return
         else:
-            current_j := discord.utils.get(guild.roles, name=possible_job)
+            current_j = discord.utils.get(guild.roles, name=possible_job)
             ctx.author.remove_roles(current_j)
             await ctx.send("You have resigned from your job!")
     
