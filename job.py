@@ -15,7 +15,8 @@ async def find_current_job(member):
 
 class Job(commands.Cog):
     # ADD NEW JOBS HERE
-    LIST_OF_JOBS = {"Worker": {"Wage": 10, "Total Occupancy": 10}}
+    LIST_OF_JOBS = {"Worker": {"Wage": 10, "Total Occupancy": 10},
+                   {"CEO": {"Wage": 50, "Total Occupancy": 1}}
 
     def __init__(self, bot):
         self.bot = bot
@@ -34,7 +35,7 @@ class Job(commands.Cog):
 
         m = await ctx.send(f"There is an available position as `{possible_job}`.\n"
                            f"It pays `{'${:,.2f}'.format(Job.LIST_OF_JOBS[possible_job]['Wage'])}`.\n"
-                           f"React with a ✅ within 30 seconds. to accept the position.")
+                           f"React with a ✅ within 30 seconds to accept the position.")
         await m.add_reaction("✅")
 
         def check(reaction, user):
@@ -62,11 +63,10 @@ class Job(commands.Cog):
     async def work(self, ctx):
         current_job = await find_current_job(ctx.message.author)
         if current_job is not None:
-            await ctx.send(f"You would've gained `{'${:,.2f}'.format(Job.LIST_OF_JOBS[current_job.name]['Wage'])}` "
-                           f"if it was implemented.")
-            # economy = self.bot.get_cog('Economy')
-            # if economy is not None:
-            # await economy.deposit_money(ctx.author, 1.25)
+            await ctx.send(f"You gained `{'${:,.2f}'.format(Job.LIST_OF_JOBS[current_job.name]['Wage'])}` ")
+            economy = self.bot.get_cog('Economy')
+            if economy is not None:
+                await economy.deposit_money(ctx.author, {'${:,.2f}'.format(Job.LIST_OF_JOBS[current_job.name]['Wage'])})
         else:
             await ctx.send("You're not hired. Try using *job.")
 
