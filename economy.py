@@ -26,6 +26,8 @@ class Economy(commands.Cog):
                 c.execute("INSERT INTO bank (id, price) VALUES (?, ?)", [member.id, initial_money-money])
                 conn.commit()
                 return True
+        elif output[0] < money:
+            return False
         update = c.execute("UPDATE bank SET price=price-? WHERE id=? AND price>=?", [money, member.id, money])
         print(update)
         conn.commit()
