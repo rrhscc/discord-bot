@@ -7,7 +7,7 @@ class rockPaperScissors(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['rps','rockpaperscissors'])
     async def rockPaperScissors(self, ctx, money: int):
         m = await ctx.send(f"Welcome To 'Rock, Paper, Scissors!' React with ✅ to begin.")
         await m.add_reaction("✅")  
