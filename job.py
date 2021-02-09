@@ -1,36 +1,75 @@
 # Get a job
 import discord
-import asyncio
 from discord.ext import commands
+import random as rand
+import asyncio
 
-class job(commands.Cog):
+
+async def find_current_job(member):
+    for r in member.roles:
+        if r.name in Job.LIST_OF_JOBS:
+            return r
+
+    return None
+
+
+class Job(commands.Cog):
+    # ADD NEW JOBS HERE
+    LIST_OF_JOBS = {"Worker": {"Wage": 10, "Total Occupancy": 10}}
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     async def job(self, ctx):
-            await ctx.send('You have a new job. Your job is now: Factory Worker')
-            guild = ctx.guild
-            member = ctx.message.author
-            try:
-                if (role := discord.utils.get(guild.roles, name="Worker")) is None: role = await guild.create_role(name="Worker")
-            except discord.errors.Forbidden:
-                await ctx.send('I do not have permission to create this role.')
-                
+        guild = ctx.guild
+        member = ctx.message.author
+        possible_job = rand.choice(list(Job.LIST_OF_JOBS.keys()))
+        current_job = await find_current_job(member)
+
+        if current_job is not None:
+            if current_job.name == possible_job:
+                await ctx.send(f"You weren't able to find a new job. Your current job is still `{current_job.name}`.")
+                return
+
+        m = await ctx.send(f"There is an available position as `{possible_job}`.\n"
+                           f"It pays `{'${:,.2f}'.format(Job.LIST_OF_JOBS[possible_job]['Wage'])}`.\n"
+                           f"React with a ✅ within 30 seconds. to accept the position.")
+        await m.add_reaction("✅")
+
+        def check(reaction, user):
+            return user == member and str(reaction.emoji) == "✅"
+        try:
+            reaction, user = await self.bot.wait_for("reaction_add", timeout=30.0, check=check)
+        except asyncio.TimeoutError:
+            await m.edit(content="Time ran out.")
+            return
+        else:
+            if (role := discord.utils.get(guild.roles, name=possible_job)) is None:
+                try:
+                    role = await guild.create_role(name=possible_job)
+                except discord.Forbidden:
+                    await ctx.send("I am not allowed to create roles.")
+                    return
+
+            if current_job is not None:
+                await member.remove_roles(current_job)
+
             await member.add_roles(role)
+            await ctx.send(f"You are now hired as `{possible_job}`!")
+
+    @commands.command()
+    async def work(self, ctx):
+        current_job = await find_current_job(ctx.message.author)
+        if current_job is not None:
+            await ctx.send(f"You would've gained `{'${:,.2f}'.format(Job.LIST_OF_JOBS[current_job.name]['Wage'])}` "
+                           f"if it was implemented.")
             # economy = self.bot.get_cog('Economy')
             # if economy is not None:
-                #await economy.deposit_money(ctx.author, 1.25)
-                
-    @commands.command()
-    async def unemployment(self, ctx):
-        guild = ctx.guild
-        role = discord.utils.get(guild.roles, name="Worker")
-        if role is None or (employed := len(role.members)) == 0:
-            await ctx.send("All members are unemployed. The unemployment rate is literally 100%.")
-        total = guild.member_count
-        unemployed = total - employed
-        await ctx.send(f'In this server, {employed} members of {total} are employed. This means {unemployed} members are unemployed. The unemployment rate is {round(unemployed/total*100)}%.')
-                
+            # await economy.deposit_money(ctx.author, 1.25)
+        else:
+            await ctx.send("You're not hired. Try using *job.")
+
+
 def setup(bot):
-    bot.add_cog(job(bot))
+    bot.add_cog(Job(bot))
