@@ -16,7 +16,7 @@ async def find_current_job(member):
 class Job(commands.Cog):
     # ADD NEW JOBS HERE
     LIST_OF_JOBS = {"Worker": {"Wage": 10, "Total Occupancy": 10},
-                   {"CEO": {"Wage": 50, "Total Occupancy": 1}}}
+                   "CEO": {"Wage": 50, "Total Occupancy": 1}}
 
     def __init__(self, bot):
         self.bot = bot
