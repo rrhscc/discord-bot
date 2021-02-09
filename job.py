@@ -15,19 +15,21 @@ async def find_current_job(member):
 
 class Job(commands.Cog):
     # ADD NEW JOBS HERE
-    LIST_OF_JOBS = {"Worker": {"Wage": 10, "Total Occupancy": 10},
-                   "CEO": {"Wage": 50, "Total Occupancy": 1}}
+    LIST_OF_JOBS = {
+        "Worker": {"Wage": 10, "Total Occupancy": 10},
+        "CEO": {"Wage": 50, "Total Occupancy": 1}
+    }
 
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['resign', 'quit'])
     async def nomorejob(self,ctx):
         current_job = await find_current_job(ctx.author)
         if current_job == None:
             await ctx.send("You don't have a job to remove!")
             return
-        msg = await ctx.send("are you sure you want to remove your job? react with ✅ to confirm.")
+        msg = await ctx.send("Are you sure you want to resign from your job? React with ✅ to confirm.")
         await msg.add_reaction("✅")
         
         def check(reaction, user):
@@ -40,7 +42,7 @@ class Job(commands.Cog):
         else:
             current_j := discord.utils.get(guild.roles, name=possible_job)
             ctx.author.remove_roles(current_j)
-            await ctx.send("removed your job!")
+            await ctx.send("You have resigned from your job!")
     
     @commands.command()
     async def job(self, ctx):
