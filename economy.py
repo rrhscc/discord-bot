@@ -75,7 +75,7 @@ class Economy(commands.Cog):
                        
                        
     @commands.command(description="Give someone money.")
-    async def give(self, ctx, amount: float = None, member: discord.Member = None):
+    async def give(self, ctx, member: discord.Member = None, amount: float = None):
         if amount == None or not (isinstance(amount, float) or isinstance(amount, int)):
             await ctx.send(f"Please specify an amount to give.")
             return
@@ -89,7 +89,7 @@ class Economy(commands.Cog):
         if success:
             await self.deposit_money(member, amount)
             
-            embed_var = discord.Embed(description=f'{str(amount)} seashells, just for you, {member.display_name}!')
+            embed_var = discord.Embed(description=f'`{{'${:,.2f}'.format(amount)}}`, just for you, {member.display_name}!')
             embed_var.set_author(name=f'From {ctx.author.display_name}...', icon_url=ctx.author.avatar_url)
             embed_var.set_thumbnail(url=member.avatar_url)
 
