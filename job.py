@@ -104,6 +104,7 @@ class Job(commands.Cog):
         current_job = await find_current_job(ctx.message.author)
         if current_job is not None:
             economy = self.bot.get_cog('Economy')
+            wage = Job.LIST_OF_JOBS[current_job.name]['Wage']
             if economy is not None:
                 await economy.deposit_money(ctx.author, wage)
             await ctx.send(f"You gained `{'${:,.2f}'.format(wage)}` ")
