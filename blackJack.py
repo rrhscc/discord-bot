@@ -9,10 +9,12 @@ class blackJack(commands.Cog):
 
     @commands.command()
     async def blackJack(self, ctx, money: int):
-        m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
+        player_amount = random.randint(0,10)
+        m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more.')
+        
+    #    m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
         await m.add_reaction("✅")
- 
-                
+        
         
         def coinflip(self):
             return random.randint(0, 1)        
@@ -25,7 +27,10 @@ class blackJack(commands.Cog):
         except asyncio.TimeoutError:
             await m.edit('timed out. :(')
         else:
-            await ctx.send('POGCHAMP')
+            new_amount = (player_amount + random.randint(0,10))
+            await ctx.send('Your new amount is: {new_amount}. Thanks for playing.')
+            player_amount = new_amount
+          #  await ctx.send('POGCHAMP')
             economy = self.bot.get_cog('Economy')
             if economy is not None:
                 await economy.withdraw_money(ctx.author, money)
