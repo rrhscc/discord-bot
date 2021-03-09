@@ -27,7 +27,7 @@ class blackJack(commands.Cog):
         else:
             new_amount = (player_amount + random.randint(0,10))
             if (new_amount > 21):
-                await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.'
+                await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.')
                 economy = self.bot.get_cog('Economy')
                 if economy is not None:
                     await economy.withdraw_money(ctx.author, money)
