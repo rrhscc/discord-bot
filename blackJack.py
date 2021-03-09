@@ -26,18 +26,18 @@ class blackJack(commands.Cog):
             await m.edit('timed out. :(')
         else:
             new_amount = (player_amount + random.randint(0,10))
-            if (new_amount > 21) { 
+            if (new_amount > 21):
                 await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.'
                 economy = self.bot.get_cog('Economy')
                 if economy is not None:
                     await economy.withdraw_money(ctx.author, money)
         
-            } else {
+              else:
                 await ctx.send(f'Your new amount is: {new_amount}. You win. Amazing.')
                 economy = self.bot.get_cog('Economy')
                 if economy is not None:
                     await economy.deposit_money(ctx.author, money * 1.25)
-            }
+                
             player_amount = new_amount
 
 def setup(bot):
