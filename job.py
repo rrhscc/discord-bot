@@ -26,6 +26,7 @@ class Job(commands.Cog):
     LIST_OF_JOBS = {
         "Worker": {"Wage": 10, "Total Occupancy": 10},
         "CEO": {"Wage": 50, "Total Occupancy": 1}
+        "Doctor": {"Wage": 25, "Total Occupancy": 1}
     }
 
     def __init__(self, bot):
