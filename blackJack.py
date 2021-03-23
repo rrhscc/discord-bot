@@ -22,9 +22,7 @@ class blackJack(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
-        except asyncio.TimeoutError:
-            await m.edit(content = 'timed out. :(')
-        else:
+            
             new_amount = (player_amount + random.randint(0,10))
             if (new_amount > 21):
                 await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.')
@@ -40,6 +38,8 @@ class blackJack(commands.Cog):
                 #    await economy.deposit_money(ctx.author, money * 1.25)
                 
             player_amount = new_amount
+        except asyncio.TimeoutError:
+            await m.edit(content = 'timed out. :(')
 
 def setup(bot):
     bot.add_cog(blackJack(bot))
