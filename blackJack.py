@@ -33,10 +33,11 @@ class blackJack(commands.Cog):
                     await economy.withdraw_money(ctx.author, money)
         
             else:
-                await ctx.send(f'Your new amount is: {new_amount}. You win. Amazing.')
-                economy = self.bot.get_cog('Economy')
-                if economy is not None:
-                    await economy.deposit_money(ctx.author, money * 1.25)
+                m = await ctx.send(f'Your new amount is: {new_amount}. You win. Amazing.')
+                await m.add_reaction("✅")
+                #economy = self.bot.get_cog('Economy')
+                #if economy is not None:
+                #    await economy.deposit_money(ctx.author, money * 1.25)
                 
             player_amount = new_amount
 
