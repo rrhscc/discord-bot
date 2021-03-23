@@ -23,7 +23,7 @@ class blackJack(commands.Cog):
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
         except asyncio.TimeoutError:
-            await m.edit('timed out. :(')
+            await m.edit(content = 'timed out. :(')
         else:
             new_amount = (player_amount + random.randint(0,10))
             if (new_amount > 21):
