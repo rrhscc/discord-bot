@@ -13,7 +13,6 @@ class blackJack(commands.Cog):
         player_amount = random.randint(0,10)
         m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more.')
         
-    #    m = await ctx.send(f'Welcome To Blackjack! React with ✅ to begin.')
         await m.add_reaction("✅")
            
 
