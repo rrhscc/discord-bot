@@ -11,9 +11,11 @@ class blackJack(commands.Cog):
     @commands.command()
     async def blackJack(self, ctx, money: int):
         player_amount = random.randint(0,10)
+        house_amount = random.randint(0,10)
         m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more.')
         
         await m.add_reaction("✅")
+        await m.add_reaction("🛑")
            
 
         def check(reaction, user):
@@ -26,19 +28,25 @@ class blackJack(commands.Cog):
             return
         
         new_amount = (player_amount + random.randint(0,10))
+        new_house_amount = (house_amount + random.randint(0,10))
         
         if (new_amount > 21):
-            await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.')
+            ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.')
             economy = self.bot.get_cog('Economy')
             if economy is not None:
                 await economy.withdraw_money(ctx.author, money)
         
-        else:
-            m = await ctx.send(f'Your new amount is: {new_amount}. You win. Amazing.')
-            await m.add_reaction("✅")
-            #economy = self.bot.get_cog('Economy')
-            #if economy is not None:
-            #    await economy.deposit_money(ctx.author, money * 1.25)
+        elif (new_amount > new_house_amount):
+            ctx.send(f'Your new amount is: {new_amount} and bot amount is: {new_house_amount}. You win. Amazing.')
+            economy = self.bot.get_cog('Economy')
+            if economy is not None:
+                await economy.deposit_money(ctx.author, money * 1.25)
+                
+        else: 
+            ctx.send(f'You lose by the house. RIP.')
+            economy = self.bot.get_cog('Economy')
+            if economy is not None:
+                await economy.withdraw_money(ctx.author, money)
                 
         player_amount = new_amount
 
