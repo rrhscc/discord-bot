@@ -23,6 +23,7 @@ class blackJack(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
+            print(reaction, user)
         except asyncio.TimeoutError:
             await m.edit(content = 'timed out. :(')
             return
