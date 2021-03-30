@@ -19,7 +19,7 @@ class blackJack(commands.Cog):
            
 
         def check(reaction, user):
-            return user == ctx.message.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "🛑"
+            return user == ctx.message.author and (str(reaction.emoji) == "✅" or str(reaction.emoji) == "🛑")
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
