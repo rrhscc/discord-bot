@@ -27,11 +27,12 @@ class shop(commands.Cog):
             if economy is not None:
                 if not economy.withdraw_money(ctx.author, 10):
                     await ctx.send('You do not have enough money for this item!')
-                username = "🎄 " + message.author.name + " 🎄"
                 try:
+                    username = "🎄 " + ctx.message.author.name + " 🎄"
                     await ctx.message.author.edit(nick=username)
                 except discord.errors.Forbidden:
                     await ctx.send('I\'m not powerful enough to change your nickname.')
+                    economy.deposit_money(ctx.author, 10)
                 await ctx.send(f'Nickname was changed.')
                 return
         
