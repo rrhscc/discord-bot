@@ -51,6 +51,7 @@ if __name__ == "__main__":
    bot.load_extension("rockPaperScissors")
    bot.load_extension("error_handler")
    bot.load_extension("shop")
+   bot.load_extension("roulette")
 
 
 # start the bot
