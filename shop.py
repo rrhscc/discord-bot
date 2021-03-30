@@ -30,10 +30,11 @@ class shop(commands.Cog):
                 try:
                     username = "🎄 " + ctx.message.author.name + " 🎄"
                     await ctx.message.author.edit(nick=username)
+                    await ctx.send(f'Nickname was changed.')
                 except discord.errors.Forbidden:
                     await ctx.send('I\'m not powerful enough to change your nickname.')
                     economy.deposit_money(ctx.author, 10)
-                await ctx.send(f'Nickname was changed.')
+                
                 return
         
 def setup(bot):
