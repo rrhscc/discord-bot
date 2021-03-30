@@ -8,7 +8,7 @@ class shop(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def blackJack(self, ctx):
+    async def shop(self, ctx):
         m = await ctx.send('Welcome to the shop? React with 1 to buy: Christmas decor for $10.')
         await m.add_reaction("1️⃣")
            
