@@ -49,7 +49,9 @@ if __name__ == "__main__":
    bot.load_extension("job")
    bot.load_extension("ping")
    bot.load_extension("rockPaperScissors")
+   bot.load_extension("error_handler")
    bot.load_extension("shop")
+
 
 # start the bot
 with open("token.txt") as f:
