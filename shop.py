@@ -25,7 +25,7 @@ class shop(commands.Cog):
             ctx.send("You bought: a christmas decor!!")
             economy = self.bot.get_cog('Economy')
             if economy is not None:
-                if not economy.withdraw_money(ctx.author, 10):
+                if not await economy.withdraw_money(ctx.author, 10):
                     await ctx.send('You do not have enough money for this item!')
                 try:
                     username = "🎄 " + ctx.message.author.name + " 🎄"
@@ -33,7 +33,7 @@ class shop(commands.Cog):
                     await ctx.send(f'Nickname was changed.')
                 except discord.errors.Forbidden:
                     await ctx.send('I\'m not powerful enough to change your nickname.')
-                    economy.deposit_money(ctx.author, 10)
+                    await economy.deposit_money(ctx.author, 10)
                 
                 return
         
