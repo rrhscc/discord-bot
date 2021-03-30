@@ -28,7 +28,7 @@ class blackJack(commands.Cog):
             return
         
         if (str(reaction.emoji == "✅")):
-        
+       
             new_amount = (player_amount + random.randint(0,10))
             new_house_amount = (house_amount + random.randint(0,10))
         
@@ -52,7 +52,7 @@ class blackJack(commands.Cog):
                 
             player_amount = new_amount
            
-         else:
+        else:
             while (player_amount > house_amount):
                 new_house_amount = (house_amount + random.randint(0,10))
                 new_house_amount = house_amount
