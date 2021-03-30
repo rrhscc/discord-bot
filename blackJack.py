@@ -19,7 +19,7 @@ class blackJack(commands.Cog):
            
 
         def check(reaction, user):
-            return user == ctx.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "🛑"
+            return user == ctx.message.author and str(reaction.emoji) == "✅" or str(reaction.emoji) == "🛑"
 
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
@@ -29,7 +29,7 @@ class blackJack(commands.Cog):
             await m.edit(content = 'timed out. :(')
             return
         
-        if (str(reaction.emoji == "✅")):
+        if str(reaction.emoji) == "✅":
        
             new_amount = (player_amount + random.randint(0,10))
             new_house_amount = (house_amount + random.randint(0,10))
@@ -60,14 +60,14 @@ class blackJack(commands.Cog):
                 new_house_amount = house_amount
                 if (house_amount > player_amount):
                     break
-            if (house_amount > 21):
+            if house_amount > 21:
                 await ctx.send(f'The houses amount is over 21. You win. Great job.')
                 economy = self.bot.get_cog('Economy')
                 if economy is not None:
                     await economy.deposit_money(ctx.author, money * 1.25)
             
             
-            elif (house_amount > player_amount):
+            elif house_amount > player_amount:
                 await ctx.send(f'Your amount is: {player_amount} and the houses amount is: {house_amount}. You lose. Try again.')
                 economy = self.bot.get_cog('Economy')
                 if economy is not None:
