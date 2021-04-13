@@ -29,6 +29,7 @@ class shop(commands.Cog):
             if economy is not None:
                 if not await economy.withdraw_money(ctx.author, 10):
                     await ctx.send('You do not have enough money for this item!')
+                    return
                 try:
                     username = "🎄 " + ctx.message.author.name + " 🎄"
                     await ctx.message.author.edit(nick=username)
@@ -43,6 +44,7 @@ class shop(commands.Cog):
             if economy is not None:
                 if not await economy.withdraw_money(ctx.author, 100000000000000001097906362944045541740492309677311846336810682903157585404911491537163328978494688899061249669721172515611590283743140088328307009198146046031271664502933027185697489699588559043338384466165001178426897626212945177628091195786707458122783970171784415105291802893207873272974885715430223118335):
                     await ctx.send('You do not have enough money for this!')
+                    return
                 try:
                     username = "💵 " + ctx.message.author.name + " 💵"
                     await ctx.message.author.edit(nick=username)
