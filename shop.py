@@ -11,7 +11,7 @@ class shop(commands.Cog):
     async def shop(self, ctx):
         m = await ctx.send('Welcome to the shop? React with 1 to buy: Christmas decor for $10.')
         await m.add_reaction("1️⃣")
-        await m.add_reaciton("2️⃣")
+        await m.add_reaction("2️⃣")
            
 
         def check(reaction, user):
