@@ -8,7 +8,7 @@ class blackJack(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['blackjack'])
     async def blackJack(self, ctx, money: int):
         player_amount = random.randint(0,10)
         house_amount = random.randint(0,10)
