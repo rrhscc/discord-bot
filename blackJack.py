@@ -10,6 +10,9 @@ class blackJack(commands.Cog):
 
     @commands.command(aliases=['blackjack'])
     async def blackJack(self, ctx, money: int):
+        economy = self.bot.get_cog('Economy')
+        if economy is not None:
+            await economy.withdraw_money(ctx.author, money)
         player_amount = random.randint(0,10)
         house_amount = random.randint(0,10)
         m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more.')
@@ -36,9 +39,6 @@ class blackJack(commands.Cog):
         
             if (new_amount > 21):
                 await ctx.send(f'Your new amount is: {new_amount}. You lost. Nice job.')
-                economy = self.bot.get_cog('Economy')
-                if economy is not None:
-                    await economy.withdraw_money(ctx.author, money)
         
             elif (new_amount > new_house_amount):
                 await ctx.send(f'Your new amount is: {new_amount} and bot amount is: {new_house_amount}. You win. Amazing.')
@@ -47,14 +47,11 @@ class blackJack(commands.Cog):
                     await economy.deposit_money(ctx.author, money * 1.25)
                 
             else: 
-                await ctx.send(f'You lose by the house. RIP.')
-                economy = self.bot.get_cog('Economy')
-                if economy is not None:
-                    await economy.withdraw_money(ctx.author, money)
+                await ctx.send(f'You lose by the house. Their amount is: {new_house_amount} while yours is: {new_amount}. RIP.')
                 
             player_amount = new_amount
            
-        else:
+        elif str(reaction.emoji) == "🛑":
             while (player_amount > house_amount):
                 new_house_amount = (house_amount + random.randint(0,10))
                 new_house_amount = house_amount
@@ -69,9 +66,6 @@ class blackJack(commands.Cog):
             
             elif house_amount > player_amount:
                 await ctx.send(f'Your amount is: {player_amount} and the houses amount is: {house_amount}. You lose. Try again.')
-                economy = self.bot.get_cog('Economy')
-                if economy is not None:
-                    await economy.withdraw_money(ctx.author, money)
             
 
 def setup(bot):
