@@ -23,7 +23,7 @@ class shop(commands.Cog):
             await m.edit('timed out. :(')
             return
           
-        elif str(reacton.emoji) == "1️⃣":   
+        elif str(reaction.emoji) == "1️⃣":   
             ctx.send("You bought: a christmas decor!!")
             economy = self.bot.get_cog('Economy')
             if economy is not None:
