@@ -33,7 +33,7 @@ class rockPaperScissors(commands.Cog):
                 m.add_reaction("✂️")
                 
                 def check(reaction, user):
-                    return user == ctx.author and (str(reaction.emoji) == "🪨" || str(reaction.emoji) == "📃" || str(reaction.emoji) == "✂️")
+                    return user == ctx.author and (str(reaction.emoji) == "🪨" or str(reaction.emoji) == "📃" or str(reaction.emoji) == "✂️")
 
                 try:
                     reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
