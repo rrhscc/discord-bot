@@ -28,9 +28,9 @@ class rockPaperScissors(commands.Cog):
                     return
                 
                 m = await ctx.send("Pick 'rock', 'paper, or 'scissors'")
-                m.add_reaction("🪨")
-                m.add_reaction("📃")
-                m.add_reaction("✂️")
+                await m.add_reaction("🪨")
+                await m.add_reaction("📃")
+                await m.add_reaction("✂️")
                 
                 def check(reaction, user):
                     return user == ctx.author and (str(reaction.emoji) == "🪨" or str(reaction.emoji) == "📃" or str(reaction.emoji) == "✂️")
