@@ -17,7 +17,19 @@ class Coinflip(commands.Cog):
             return
         if member == ctx.author:
             await ctx.send("Nice try, you cant bet against yourself.")
-            return
+            win_chance = random.randint(0,10)
+            if (win_chance >= 9): 
+                await ctx.send("You won. Congrats.")
+                econony = self.bot.get_cog('Economy')
+                author_withdraw = await economy.desposit(ctx.author, 1)
+            else: 
+                await ctx.send("You lost.")
+                economy = self.bot.get_cog('Economy')
+                author_withdraw = await economy.withdraw_money(ctx.author, bet)
+                if not author_withdraw:
+                    await ctx.send(f"{ctx.author.mention} doesn't have enough money.")
+                    return
+            
         if member.bot:
             await ctx.send("You can't coinflip against bots!")
             return
