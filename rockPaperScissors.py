@@ -74,10 +74,8 @@ class rockPaperScissors(commands.Cog):
                 await ctx.send(msgstring)
                 
                 if result == 1:
-                    await economy.deposit_money(ctx.author, money * 1.5)
-                elif result == -1:
-                    await economy.deposit_money(ctx.author, money * 0.5)
-                else:
+                    await economy.deposit_money(ctx.author, money * 2)
+                elif result == 0:
                     await economy.deposit_money(ctx.author, money)
 def setup(bot):
     bot.add_cog(rockPaperScissors(bot))
