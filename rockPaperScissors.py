@@ -20,43 +20,64 @@ class rockPaperScissors(commands.Cog):
         except asyncio.TimeoutError:
             await m.edit('timed out. :(')
         else:
-            await ctx.send('POGCHAMP')
             economy = self.bot.get_cog('Economy')
             if economy is not None:
-                await economy.withdraw_money(ctx.author, money)
+                withdraw = await economy.withdraw_money(ctx.author, money)
+                if not withdraw:
+                    await ctx.send("You do not have enough money!")
+                    return
                 
+                m = await ctx.send("Pick 'rock', 'paper, or 'scissors'")
+                m.add_reaction("🪨")
+                m.add_reaction("📃")
+                m.add_reaction("✂️")
+                
+                def check(reaction, user):
+                    return user == ctx.author and (str(reaction.emoji) == "🪨" || str(reaction.emoji) == "📃" || str(reaction.emoji) == "✂️")
 
-                choice = input("Pick 'rock', 'paper, or 'scissors': ")
+                try:
+                    reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
+                except asyncio.TimeoutError:
+                    await m.edit('timed out. :(')
+                
                 options = ['rock', 'paper', 'scissors']
+                emojiOptions = ['🪨', '📃', '✂️']
+                
+                choice = options[ emojiOptions.index(str(reaction.emoji)) ]
                 botChoice = random.choice(options)
-                print(f'Bot choice: {botChoice}\tYour choice: {choice}')
+                msgstring = f'Bot choice: {botChoice}\nYour choice: {choice}\n'
                 if choice == botChoice:
-                    print("It's a tie!")
+                    msgstring+="It's a tie!"
                     result = 0
                 elif len(choice) + len(botChoice) == 9:
                     if choice == 'paper':
-                      print("You won!")
+                      msgstring+="You won!"
                       result = 1
                     else:
-                      print("You lost :/")
+                      msgstring+="You lost :/"
                       result = -1
                 elif len(choice) + len(botChoice) == 13:
                     if choice == 'scissors':
-                      print("You won!")
+                      msgstring+="You won!"
                       result = 1
                     else:
-                      print('You lost :/')
+                      msgstring+='You lost :/'
                       result = -1
                 elif len(choice) + len(botChoice) == 12:
                     if choice == 'rock':
-                      print('You won!')
+                      msgstring+='You won!'
                       result = 1
                     else:
-                      print('You lost :/')
+                      msgstring+='You lost :/'
                       result = -1
+                
+                await ctx.send(msgstring)
+                
                 if result == 1:
-                    await economy.deposit_money(ctx.author, money * 1.25)
+                    await economy.deposit_money(ctx.author, money * 1.5)
                 elif result == -1:
-                    await economy.withdraw_money(ctx.author, money - result)
+                    await economy.deposit_money(ctx.author, money * 0.5)
+                else:
+                    await economy.deposit_money(ctx.author, money)
 def setup(bot):
     bot.add_cog(rockPaperScissors(bot))
