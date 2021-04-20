@@ -15,22 +15,33 @@ class blackJack(commands.Cog):
             await economy.withdraw_money(ctx.author, money)
         player_amount = random.randint(0,10)
         house_amount = random.randint(0,10)
-        m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more.')
+        m = await ctx.send(f'Welcome to Blackjack! Your starting amount is: {player_amount}. React to add more. Dont react to not hit.')
         
         await m.add_reaction("✅")
-        await m.add_reaction("🛑")
            
 
         def check(reaction, user):
-            return user == ctx.message.author and (str(reaction.emoji) == "✅" or str(reaction.emoji) == "🛑")
+            return user == ctx.message.author and (str(reaction.emoji) == "✅")
 
         try:
-            reaction, user = await self.bot.wait_for('reaction_add', timeout=30.0, check=check)
+            reaction, user = await self.bot.wait_for('reaction_add', timeout=20.0, check=check)
             print(ctx.author)
             print(reaction, user)
         except asyncio.TimeoutError:
-            await m.edit(content = 'timed out. :(')
-            return
+            while (player_amount > house_amount):
+                new_house_amount = (house_amount + random.randint(0,10))
+                new_house_amount = house_amount
+                if (house_amount > player_amount):
+                    break
+            if house_amount > 21:
+                await ctx.send(f'The houses amount is over 21. You win. Great job.')
+                economy = self.bot.get_cog('Economy')
+                if economy is not None:
+                    await economy.deposit_money(ctx.author, money * 1.25)
+            
+            
+            elif house_amount > player_amount:
+                await ctx.send(f'Your amount is: {player_amount} and the houses amount is: {house_amount}. You lose. Try again.')
         
         if str(reaction.emoji) == "✅":
        
@@ -51,22 +62,5 @@ class blackJack(commands.Cog):
                 
             player_amount = new_amount
            
-        elif str(reaction.emoji) == "🛑":
-            while (player_amount > house_amount):
-                new_house_amount = (house_amount + random.randint(0,10))
-                new_house_amount = house_amount
-                if (house_amount > player_amount):
-                    break
-            if house_amount > 21:
-                await ctx.send(f'The houses amount is over 21. You win. Great job.')
-                economy = self.bot.get_cog('Economy')
-                if economy is not None:
-                    await economy.deposit_money(ctx.author, money * 1.25)
-            
-            
-            elif house_amount > player_amount:
-                await ctx.send(f'Your amount is: {player_amount} and the houses amount is: {house_amount}. You lose. Try again.')
-            
-
 def setup(bot):
     bot.add_cog(blackJack(bot))
